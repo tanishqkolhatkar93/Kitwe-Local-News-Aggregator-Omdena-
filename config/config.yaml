@@ -1,0 +1,20 @@
+artifacts_root: artifacts
+
+data_ingestion:
+
+  root_dir: artifacts/data_ingestion
+
+  News_websites: 
+    Copperbelt_Energy: "https://cecinvestor.com/search/kitwe/feed/rss2/"
+    ZNBC: "https://znbc.co.zm/news/search/kitwe/feed/rss2/"
+    News_Invasion_24: "https://newsinvasion24.com/search/kitwe/feed/rss2/"
+    Mwebantu: "https://www.mwebantu.com/search/kitwe/feed/rss2/"
+    Lusaka_Times: "https://www.lusakatimes.com/search/kitwe/feed/rss2/"
+    Kitwe_Online: "https://kitweonline.com/search/kitwe/feed/rss2/"
+    Daily_Revelation_Zambia: "https://dailyrevelationzambia.com/search/kitwe/feed/rss2/"
+    Zambia_Monitor: "https://www.zambiamonitor.com/search/kitwe/feed/rss2/"
+    Tech_Africa_News: "https://www.techafricanews.com/search/kitwe/feed/rss2/"
+    Zambian_Eye: "https://zambianeye.com/search/kitwe/feed/rss2/"
+    DailyMail: "https://www.daily-mail.co.zm/search/kitwe/feed/rss2/"
+
+  output_path: "artifacts/data_ingestion/news_gathering.csv"
