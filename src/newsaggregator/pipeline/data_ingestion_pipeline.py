@@ -10,14 +10,17 @@ class DataIngestionTrainingPipeline:
     def initiate_data_ingestion(self):
         try:
             config = ConfigurationManager()
-            data_ingestion_config = config.get_data_ingestion_config()                
+            data_ingestion_config = config.get_data_ingestion_config()
             data_ingestion = DataIngestion(config=data_ingestion_config)
-            # Use data_ingestion_config.news_websites instead of News_websites
-            for source_name, feed_url in data_ingestion_config.News_websites.items():                    data_ingestion.get_feed_entries(feed_url)
-            data_ingestion.ingest_data()
 
+            # Call the extract_data method
+            data = data_ingestion.load_and_save_data()
+
+            # You can now use `data` for further processing
         except Exception as e:
-                raise e
+            logger.error(f"An error occurred during data ingestion: {e}")
+            
+
             
             
 if __name__ == "__main__":

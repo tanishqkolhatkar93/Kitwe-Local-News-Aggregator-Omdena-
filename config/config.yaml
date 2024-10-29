@@ -17,4 +17,18 @@ data_ingestion:
     Zambian_Eye: "https://zambianeye.com/search/kitwe/feed/rss2/"
     DailyMail: "https://www.daily-mail.co.zm/search/kitwe/feed/rss2/"
 
-  output_path: "artifacts/data_ingestion/news_gathering.csv"
+  input_path : "data/News_Aggregator_Kitwe_Data_Collection.csv"
+
+  output_path: "artifacts/data_ingestion/data/raw/News_Aggregator_Kitwe_Data_Collection.csv"
+
+data_cleaning:
+  
+  root_dir: artifacts/data_cleaning
+
+  input_path : "artifacts/data_ingestion/data/raw/News_Aggregator_Kitwe_Data_Collection.csv"
+
+  date_column : "Date"
+
+  text_columns : ['Source', 'Category', 'Headline', 'Description']
+
+  output_path : artifacts/data_cleaning/data/News_Aggregator_transformed.csv
