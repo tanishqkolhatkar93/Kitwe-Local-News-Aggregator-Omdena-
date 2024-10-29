@@ -16,3 +16,4 @@ class DataCleaningConfig:
     output_path: Path
     date_column : str
     text_columns : List[str]
+    

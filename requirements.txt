@@ -34,3 +34,5 @@ tzdata
 urllib3
 wcwidth
 feedparser
+torch
+transformers
