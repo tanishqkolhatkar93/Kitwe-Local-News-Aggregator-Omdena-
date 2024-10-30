@@ -36,3 +36,4 @@ wcwidth
 feedparser
 torch
 transformers
+textblob

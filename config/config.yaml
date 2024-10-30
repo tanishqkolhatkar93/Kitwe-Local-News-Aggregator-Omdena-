@@ -1,47 +1,166 @@
+# Configuration for News Aggregator Project
+
 artifacts_root: artifacts
 
 data_ingestion:
+  root_dir: artifacts/Data_Ingestion
+  input_path: "data/News_Aggregator_Kitwe_Data_Collection.csv"
+  output_path: "artifacts/Data_Ingestion/News_Aggregator_Kitwe_Data_Collection.csv"
 
-  root_dir: artifacts/data_ingestion
-
-  News_websites: 
-    Copperbelt_Energy: "https://cecinvestor.com/search/kitwe/feed/rss2/"
-    ZNBC: "https://znbc.co.zm/news/search/kitwe/feed/rss2/"
-    News_Invasion_24: "https://newsinvasion24.com/search/kitwe/feed/rss2/"
-    Mwebantu: "https://www.mwebantu.com/search/kitwe/feed/rss2/"
-    Lusaka_Times: "https://www.lusakatimes.com/search/kitwe/feed/rss2/"
-    Kitwe_Online: "https://kitweonline.com/search/kitwe/feed/rss2/"
-    Daily_Revelation_Zambia: "https://dailyrevelationzambia.com/search/kitwe/feed/rss2/"
-    Zambia_Monitor: "https://www.zambiamonitor.com/search/kitwe/feed/rss2/"
-    Tech_Africa_News: "https://www.techafricanews.com/search/kitwe/feed/rss2/"
-    Zambian_Eye: "https://zambianeye.com/search/kitwe/feed/rss2/"
-    DailyMail: "https://www.daily-mail.co.zm/search/kitwe/feed/rss2/"
-
-  input_path : "data\final_data.csv"
-
-  output_path: "artifacts/data_ingestion/data/raw/News_Aggregator_Kitwe_Data_Collection.csv"
-
-data_cleaning:
+data_categorizer:
+  root_dir: artifacts/Data_Categorizer
+  input_path: "artifacts/Data_Ingestion/News_Aggregator_Kitwe_Data_Collection.csv"
+  output_path: "artifacts/Data_Categorizer/News_Aggregator_labelled.csv"
   
-  root_dir: artifacts/data_cleaning
-
-  input_path : "artifacts/data_ingestion/data/raw/News_Aggregator_Kitwe_Data_Collection.csv"
-
-  date_column : "Date"
-
-  text_columns : ['Source', 'Category', 'Headline', 'Description']
-
-  output_path : artifacts/data_cleaning/data/News_Aggregator_transformed.csv
+  categories_keywords:
+    sports: 
+      - football
+      - soccer
+      - basketball
+      - tennis
+      - cricket
+      - olympics
+      - athlete
+      - sports
+    politics: 
+      - government
+      - election
+      - politician
+      - policy
+      - parliament
+      - minister
+      - president
+      - vote
+    education: 
+      - school
+      - university
+      - education
+      - college
+      - students
+      - learning
+      - teacher
+      - scholarship
+    health_and_wellness: 
+      - health
+      - hospital
+      - doctor
+      - wellness
+      - mental health
+      - fitness
+      - medicine
+      - disease
+    development: 
+      - development
+      - infrastructure
+      - construction
+      - road
+      - bridge
+      - building
+      - urbanization
+    narcotics: 
+      - narcotics
+      - drug
+      - cocaine
+      - heroin
+      - meth
+      - drug trafficking
+      - illegal drugs
+    fashion: 
+      - fashion
+      - clothing
+      - designer
+      - runway
+      - model
+      - style
+      - apparel
+      - trends
+    career: 
+      - job
+      - career
+      - employment
+      - opportunity
+      - work
+      - recruitment
+      - hiring
+      - position
+    local_news: 
+      - local
+      - community
+      - city
+      - town
+      - village
+      - municipality
+      - neighborhood
+      - region
+    economy_news: 
+      - economy
+      - economic
+      - finance
+      - market
+      - stocks
+      - currency
+      - inflation
+      - gdp
+    business_news: 
+      - business
+      - company
+      - corporation
+      - entrepreneur
+      - startup
+      - industry
+      - investment
+      - profit
 
 data_labelling:
-  root_dir : artifacts/data_labelling
-  
-  input_path : "artifacts/data_cleaning/data/News_Aggregator_transformed.csv"
+  root_dir: artifacts/Data_Labelling
+  input_path: "artifacts/Data_Categorizer/News_Aggregator_labelled.csv"
+  output_path: "artifacts/Data_Labelling/final_data.csv"
+  model_path: "artifacts/Data_Labelling/model.joblib"  
 
-  output_path : "artifacts/data_labelling/data/News_Aggregator_labelled.csv"
+  reputable_sources:
+    - bbc.com
+    - reuters.com
+    - nytimes.com
+    - cnn.com
+    - guardian.com
+    - npr.org
+    - forbes.com
+    - bloomberg.com
+    - washingtonpost.com
+    - thetimes.co.uk
+    - economist.com
+    - wsj.com
+    - cnbc.com
+    - daily-mail.co.zm
+    - times.co.zm
+    - znbc.co.zm
+    - flavaradioandtv.com
+    - lusakatimes.com
+    - kitwetimes.com
 
-  label_column : "Category"
+  suspicious_domain_patterns:
+    - "\\.(info|lo|ru|cn|xyz|top|news|live|buzz|click|online)$"
 
-  titles : "Headline"
+  sensational_keywords:
+    - shocking
+    - unbelievable
+    - amazing
+    - incredible
+    - secret
+    - exposed
+    - "you won't believe"
+    - scandal
+    - controversy
 
-  texts : "Description"
+  thresholds:
+    excessive_capitalization: 3
+    sensational_keyword_count: 2
+    sentiment_score: 0.5
+    suspicious_links_count: 2
+
+data_cleaning:
+  root_dir: artifacts/Data_Cleaning
+  input_path: "artifacts/Data_Labelling/final_data.csv"
+  date_column: "Date"
+  text_columns: ['Source', 'Category', 'Headline', 'Description']
+  output_path: artifacts/Data_Cleaning/data/News_Aggregator_transformed.csv
