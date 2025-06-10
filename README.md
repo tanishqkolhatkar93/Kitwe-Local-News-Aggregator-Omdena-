@@ -8,7 +8,7 @@
 
 The Kitwe-Focused News Project aims to gather, analyze, and interpret local news articles centered around Kitwe, Zambia, by creating a structured dataset from reputable Zambian news sources. This README will document each stage of the project, beginning with Data Collection and continuing through Data Preprocessing, Data Analysis, and Insights Generation.
 
----
+--- 
 
 ## Project Stages
 
